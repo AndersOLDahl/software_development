@@ -1,0 +1,5 @@
+# OSX
+.DS_Store
+
+# Vi
+[._]*.s[a-w][a-z]
