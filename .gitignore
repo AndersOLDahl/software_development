@@ -3,3 +3,12 @@
 
 # Vi
 [._]*.s[a-w][a-z]
+
+
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*
+!/log/.keep
+/tmp
