@@ -1,4 +1,7 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
 
-<h1>Hello, Rails! This will be our main page.</h1>
+<div style='width: 800px;'>
+    <div id="map" data-microsites="<%= @hash.to_json %>" style='width: 800px; height: 400px;'>
+    </div>
+</div>
