@@ -8,15 +8,15 @@
 
 Microsite.destroy_all
 10.times do
-  microsite = Microsite.new(site: "TEST",
+  microsite = Microsite.new(site: "TEST" + rand(65...70).chr,
                             field_lat: rand(-90...91),
                             field_lon: rand(-180...191),
-                            location: "TEST",
-                            state_province: "TEST",
-                            country: "TEST",
-                            biomimic: "TEST",
-                            zone: "TEST",
-                            sub_zone: "TEST",
+                            location: "TEST" + rand(65...70).chr,
+                            state_province: "TEST" + rand(65...70).chr,
+                            country: "TEST" + rand(65...70).chr,
+                            biomimic: "TEST" + rand(65...70).chr,
+                            zone: "TEST" + rand(65...70).chr,
+                            sub_zone: "TEST" + rand(65...70).chr,
                             wave_exp: rand(0...100),
                             tide_height: rand(0...100)
                            )
