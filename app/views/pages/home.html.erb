@@ -12,16 +12,6 @@
     </div>
 </div>
 
-<%
-=begin
-%>
-<% form_for @microsites do |f| %>
-    <%= f.collection_select(:microsite_id, Microsite.all, :id, :country) %>
-<% end %>
-<%
-=end
-%>
-
 <%= select(:microsite, :site, Microsite.all.collect {|m| m.site}, { include_blank: 'Site' }) %>
 <%= select(:microsite, :country, Microsite.all.collect {|m| m.country}, { include_blank: 'Country'}) %>
 <%= select(:microsite, :state_province, Microsite.all.collect {|m| m.state_province}, { include_blank: 'State/Province' }) %>
