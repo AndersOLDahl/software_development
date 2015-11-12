@@ -25,3 +25,4 @@ end
 
 User.new(:email => "user@name.com", :password => 'password', :password_confirmation => 'password').save
 User.new(:email => "dahl.a@husky.neu.edu", :password => 'password', :password_confirmation => 'password').save
+User.new(:email => "abraham.emi@husky.neu.edu", :password => 'password', :password_confirmation => 'password').save
