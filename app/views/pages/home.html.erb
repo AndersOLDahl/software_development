@@ -1,12 +1,16 @@
-<p>Pages#home</p>
-<p>Find me in app/views/pages/home.html.erb</p>
-
-
-<h1 class="helmuth-title">Helmuth Microsite</h1>
+<header>
+    <h1>Helmuth Lab Database</h1>
 
     <% if user_signed_in? %>
-        <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "helmuth-login") %>
+        <div id="admin-login" class="logged-in">
+            <span id="current-user"><%= current_user.email %></span>
+            <%= link_to('Log Out', destroy_user_session_path, method: :delete, class: "generic-button") %>
+        </div>
     <% else %>
-        <%= link_to('Login', new_user_session_path, class: "helmuth-login") %>
+        <div id="admin-login" class="logged-out">
+            <%= link_to('Log In', new_user_session_path, class: "generic-button") %>
+        </div>
     <% end %>
-    <div id="map" class="helmuth-map" data-microsites="<%= @hash.to_json %>"></div>
+</header>
+
+<div id="map" data-microsites="<%= @hash.to_json %>"></div>
