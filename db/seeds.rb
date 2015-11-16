@@ -1,11 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Reading.destroy_all
 Microsite.destroy_all
 10.times do
   microsite = Microsite.new(site: "TEST",
@@ -21,6 +17,13 @@ Microsite.destroy_all
                             tide_height: rand(0...100)
                            )
   microsite.save!
+
+  5.times do
+      reading = Reading.new(microsite_id: microsite.id,
+                            timestamp: Time.at(Time.now().to_f - rand(0...500000000)),
+                            temperature: rand(-5...30))
+      reading.save!
+  end
 end
 
 User.new(:email => "user@name.com", :password => 'password', :password_confirmation => 'password').save
