@@ -1,16 +1,15 @@
-<h1>Pages#home</h1>
+<p>Pages#home</p>
 <p>Find me in app/views/pages/home.html.erb</p>
 
-<% if user_signed_in? %>
-    <%= link_to('logout', destroy_user_session_path, method: :delete) %>
-<% else %>
-    <%= link_to('login', new_user_session_path) %>
-<% end %>
 
-<div style='width: 800px;'>
-    <div id="map" data-microsites="<%= @hash.to_json %>" style='width: 800px; height: 400px;'>
-    </div>
-</div>
+<h1 class="helmuth-title">Helmuth Microsite</h1>
+
+    <% if user_signed_in? %>
+        <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "helmuth-login") %>
+    <% else %>
+        <%= link_to('Login', new_user_session_path, class: "helmuth-login") %>
+    <% end %>
+    <div id="map" class="helmuth-map" data-microsites="<%= @hash.to_json %>"></div>
 
 <%= select(:microsite, :site, Microsite.all.collect {|m| m.site}.uniq.sort, { include_blank: 'Site' }) %>
 <%= select(:microsite, :country, Microsite.all.collect {|m| m.country}.uniq.sort, { include_blank: 'Country'}) %>
