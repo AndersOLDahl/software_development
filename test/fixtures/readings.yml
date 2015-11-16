@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  microsite_id: 1
+  timestamp: 2015-11-12 00:40:10
+  temperature: 1.5
+
+two:
+  microsite_id: 1
+  timestamp: 2015-11-12 00:40:10
+  temperature: 1.5

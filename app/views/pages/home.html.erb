@@ -14,3 +14,9 @@
 </header>
 
 <div id="map" data-microsites="<%= @hash.to_json %>"></div>
+
+<%= select(:microsite, :site, Microsite.all.collect {|m| m.site}.uniq.sort, { include_blank: 'Site' }) %>
+<%= select(:microsite, :country, Microsite.all.collect {|m| m.country}.uniq.sort, { include_blank: 'Country'}) %>
+<%= select(:microsite, :state_province, Microsite.all.collect {|m| m.state_province}.uniq.sort, { include_blank: 'State/Province' }) %>
+<%= select(:microsite, :zone, Microsite.all.collect {|m| m.zone}.uniq.sort, { include_blank: 'Zone' }) %>
+<%= select(:microsite, :sub_zone, Microsite.all.collect {|m| m.sub_zone}.uniq.sort, { include_blank: 'SubZone' }) %>
