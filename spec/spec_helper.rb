@@ -3,9 +3,13 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'spec_helper'
-require 'rspec/rails'
+require 'capybara/rails'
+require 'capybara/dsl'
 require 'factory_girl'
+require 'rspec/rails'
+require 'spec_helper'
+require 'selenium-webdriver'
+require 'site_prism'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -57,3 +61,10 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+Capybara.register_driver :selenium do |app|
+  profile = Selenium::WebDriver::Firefox::Profile.new
+  Capybara::Selenium::Driver.new( app, :browser => :firefox, :profile => profile )
+end
+
+Capybara.default_driver = :selenium

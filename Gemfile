@@ -18,8 +18,11 @@ gem 'underscore-rails'
 
 group :development, :test do
   gem 'byebug'
-  gem 'rspec-rails'
+  gem 'capybara'
   gem 'factory_girl_rails'
+  gem 'rspec-rails'
+  gem 'selenium-webdriver'
+  gem 'site_prism'
 end
 
 group :development do
