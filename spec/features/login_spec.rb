@@ -5,7 +5,6 @@ feature "Login Management", :type => :feature do
 
   scenario "User login  Success" do
     visit "/"
-
     click_link('Log In')
     fill_in "Email", :with => "user@name.com"
     fill_in "Password", :with => "password"
@@ -15,10 +14,8 @@ feature "Login Management", :type => :feature do
     expect(page).to have_text("Signed out successfully.")
   end
 
-
- scenario "User login Fail" do
+  scenario "User login Fail" do
     visit "/"
-
     click_link('Log In')
     fill_in "Email", :with => "fart@farting.com"
     fill_in "Password", :with => "farts"
