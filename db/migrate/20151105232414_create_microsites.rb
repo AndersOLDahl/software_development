@@ -10,7 +10,7 @@ class CreateMicrosites < ActiveRecord::Migration
       t.string :biomimic, null: false
       t.string :zone
       t.string :sub_zone
-      t.float :wave_exp
+      t.string :wave_exp
       t.float :tide_height
     end
   end

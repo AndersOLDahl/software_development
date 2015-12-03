@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'pages#home'
+  match '/microsite/create' => 'microsites#create', :as => :create_microsite, via: [:get, :post]
 
   get 'readings' => 'readings#index'
 

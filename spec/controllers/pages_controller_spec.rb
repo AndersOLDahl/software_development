@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe PagesController do
   describe "GET home" do
+    it "assigns @microsite" do
+      get :home
+      expect(assigns(:microsites)).not_to be_nil
+    end
+
     it "assigns @microsites" do
       get :home
       expect(assigns(:microsites)).not_to be_nil

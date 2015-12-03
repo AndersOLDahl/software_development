@@ -62,8 +62,19 @@ GEM
     coffee-script (2.4.1)
       coffee-script-source
       execjs
+<<<<<<< HEAD
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.0)
+=======
+    coffee-script-source (1.9.1.1)
+    countries (1.2.2)
+      currencies (~> 0.4.2)
+      i18n_data (~> 0.7.0)
+    country_select (2.5.1)
+      countries (~> 1.2.0)
+      sort_alphabetical (~> 1.0)
+    currencies (0.4.2)
+>>>>>>> Add Microsites from homepage. You need to be logged in. Alerts and like 12 tests.. mostly validations
     debug_inspector (0.0.2)
     devise (3.5.2)
       bcrypt (~> 3.0)
@@ -85,6 +96,7 @@ GEM
       activesupport (>= 4.1.0)
     gmaps4rails (2.1.2)
     i18n (0.7.0)
+    i18n_data (0.7.0)
     jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -179,9 +191,16 @@ GEM
     site_prism (2.8)
       addressable (>= 2.3.3, < 3.0)
       capybara (>= 2.1, < 3.0)
+<<<<<<< HEAD
     spring (1.5.0)
     sprockets (3.5.0)
       concurrent-ruby (~> 1.0)
+=======
+    sort_alphabetical (1.0.2)
+      unicode_utils (>= 1.2.2)
+    spring (1.4.0)
+    sprockets (3.4.0)
+>>>>>>> Add Microsites from homepage. You need to be logged in. Alerts and like 12 tests.. mostly validations
       rack (> 1, < 3)
     sprockets-rails (2.3.3)
       actionpack (>= 3.0)
@@ -198,6 +217,7 @@ GEM
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     underscore-rails (1.8.3)
+    unicode_utils (1.4.0)
     warden (1.2.3)
       rack (>= 1.0)
     web-console (2.2.1)
@@ -217,6 +237,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.2.0)
   byebug
   capybara
+  country_select
   devise
   factory_girl_rails
   gmaps4rails
