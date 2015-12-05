@@ -22,3 +22,7 @@
     <%= select(:microsite, :zone, @zone, {:prompt => "Zone"}, {:multiple => true}) %>
     <%= select(:microsite, :sub_zone, @sub_zone, {:prompt => "SubZone"}, {:multiple => true}) %>
 </div>
+
+<div id="export-options">
+    <%= link_to('Export CSV', {controller: "readings", format: :csv}, class: "generic-button")%>
+</div>
