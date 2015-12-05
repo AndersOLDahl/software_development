@@ -1,5 +1,7 @@
 class Reading < ActiveRecord::Base
-  	belongs_to :microsite
+    belongs_to :microsite
+    validates :timestamp, presence: true
+    validates :temperature, presence: true
 
     def self.csv_header
         CSV::Row.new([:timestamp, :temperature, :site, :field_lat, :field_lon, :location, :state_province, :country, :biomimic, :zone, :sub_zone, :wave_exp, :tide_height],

@@ -11,29 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151112054010) do
+ActiveRecord::Schema.define(version: 20151204185924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "microsites", force: :cascade do |t|
-    t.string "site",           null: false
-    t.float  "field_lat",      null: false
-    t.float  "field_lon",      null: false
-    t.string "location",       null: false
-    t.string "state_province", null: false
-    t.string "country",        null: false
-    t.string "biomimic",       null: false
+    t.string "site"
+    t.float  "field_lat"
+    t.float  "field_lon"
+    t.string "location"
+    t.string "state_province"
+    t.string "country"
+    t.string "biomimic"
     t.string "zone"
     t.string "sub_zone"
     t.string "wave_exp"
     t.float  "tide_height"
+    t.string "microsite_id"
   end
 
   create_table "readings", force: :cascade do |t|
     t.integer  "microsite_id"
-    t.datetime "timestamp",    null: false
-    t.float    "temperature",  null: false
+    t.datetime "timestamp"
+    t.float    "temperature"
   end
 
   create_table "users", force: :cascade do |t|

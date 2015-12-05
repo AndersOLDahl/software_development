@@ -5,6 +5,11 @@
                 <%= content_tag :div, value, class: "flash #{key}" %>
             <% end %>
             <p>
+            <%= f.label :microsite_id %><br>
+            <%= f.text_field :microsite_id %>
+            </p>
+
+            <p>
             <%= f.label :site %><br>
             <%= f.text_field :site %>
             </p>
@@ -63,7 +68,11 @@
             <%= f.submit %>
             </p>
 
-
+        <% end %>
+        <%= form_for(:microsite, url: upload_microsite_data_path, html: { multipart: true }) do |f| %>
+            <%= f.select :id, options_for_select(Microsite.all.collect {|m| [m.microsite_id, m.id]}.sort) %>
+            <%= file_field(:file, :data, accept: "text/plain") %>
+            <%= submit_tag "Upload text File" %>
         <% end %>
     <% end %>
 </div>

@@ -1,5 +1,6 @@
 class Microsite < ActiveRecord::Base
-  has_many :readings
+  has_many :readings, :dependent => :destroy
+  validates :microsite_id, presence: true, uniqueness: true
   validates :site, presence: true
   validates :field_lat, presence: true, numericality: true, inclusion: -90..90
   validates :field_lon, presence: true, numericality: true, inclusion: -180..180
