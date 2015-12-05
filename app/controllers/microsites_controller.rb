@@ -1,5 +1,3 @@
-require 'date'
-
 class MicrositesController < ApplicationController
   def create
     if user_signed_in?
