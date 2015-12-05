@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'pages#home'
-  match '/microsite/create' => 'microsites#create', :as => :create_microsite, via: [:get, :post]
-  match '/microsite/destroy' => 'microsites#destroy', :as => :destroy_microsite, via: [:post]
-  match '/microsite/upload' => 'microsites#upload', :as => :upload_microsite_data, via: [:get, :post]
+  match '/microsite/create' => 'microsites#create', :as => :create_microsite, via: [:post]
+  match '/microsite/destroy' => 'microsites#destroy', :as => :destroy_microsite, via: [:destroy, :post]
+  match '/reading/upload' => 'readings#upload', :as => :upload_readings, via: [:post]
 
   get 'readings' => 'readings#index'
 

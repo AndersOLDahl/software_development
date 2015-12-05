@@ -73,8 +73,8 @@
             <%= f.select :id, options_for_select(Microsite.all.collect {|m| [m.microsite_id, m.id]}.sort) %>
             <%= f.submit "Destroy Microsite" %>
         <% end %>
-        <%= form_for(:microsite, url: upload_microsite_data_path, html: { multipart: true }) do |f| %>
-            <%= f.select :id, options_for_select(Microsite.all.collect {|m| [m.microsite_id, m.id]}.sort) %>
+        <%= form_for(:reading, url: upload_readings_path, html: { multipart: true }) do |f| %>
+            <%= select_tag :microsite_id, options_for_select(Microsite.all.collect {|m| [m.microsite_id, m.id]}.sort) %>
             <%= select_tag :date_format, options_for_select(["DayMonthYear", "MonthDayYear", "YearMonthDay"]) %>
             <%= file_field(:file, :data, accept: "text/plain") %>
             <%= submit_tag "Upload text File" %>
