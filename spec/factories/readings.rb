@@ -3,5 +3,6 @@ FactoryGirl.define do
     microsite_id    1
     timestamp       Time.now.utc.to_date
     temperature     1.5
+    association :microsite
   end
 end
