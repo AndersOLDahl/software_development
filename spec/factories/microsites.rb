@@ -11,5 +11,6 @@ FactoryGirl.define do
     sub_zone        "Test sub_zone"
     wave_exp        1.5
     tide_height     1.5
+    association :readings
   end
 end
