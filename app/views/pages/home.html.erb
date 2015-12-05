@@ -16,7 +16,7 @@
 <div id="map" data-microsites="<%= @hash.to_json %>"></div>
 
 <div id="filters">
-    <%= select(:microsite, :site, @sites, {:prompt => "Site"}, {:multiple => true}) %>
+    <%= select(:microsite, :site, @sites, {:prompt => "Site"}, {:multiple => true, :class => "select"}) %>
     <%= select(:microsite, :country, @country, {:prompt => "Country"}, {:multiple => true}) %>
     <%= select(:microsite, :state_province, @state_province, {:prompt => "State/Province"}, {:multiple => true}) %>
     <%= select(:microsite, :zone, @zone, {:prompt => "Zone"}, {:multiple => true}) %>
