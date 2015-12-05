@@ -23,7 +23,7 @@
     <%= select(:microsite, :sub_zone, Microsite.all.collect {|m| m.sub_zone}.uniq.sort, { include_blank: 'SubZone' }) %>
 </div>
 
-<%= line_chart Microsite.all.collect { |m|
+<%= line_chart Microsite.all.first(10).collect { |m|
     {name: m.id, data: Reading.where(microsite_id: m.id).collect { |r|
         [r.timestamp, r.temperature]
     }}
