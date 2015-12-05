@@ -3,18 +3,19 @@
 
 Reading.destroy_all
 Microsite.destroy_all
-10.times do
-  microsite = Microsite.new(site: "TEST" + rand(65...70).chr,
-                            field_lat: rand(-90...91),
-                            field_lon: rand(-180...191),
-                            location: "TEST" + rand(65...70).chr,
-                            state_province: "TEST" + rand(65...70).chr,
-                            country: "TEST" + rand(65...70).chr,
-                            biomimic: "TEST" + rand(65...70).chr,
-                            zone: "TEST" + rand(65...70).chr,
-                            sub_zone: "TEST" + rand(65...70).chr,
-                            wave_exp: rand(0...100),
-                            tide_height: rand(0...100)
+(1..10).each do |i|
+  microsite = Microsite.new(microsite_id: "ID" + i.to_s,
+                            site: "TEST" + i.to_s,
+                            field_lat: i,
+                            field_lon: i,
+                            location: "TEST" + i.to_s,
+                            state_province: "TEST" + i.to_s,
+                            country: "TEST" + i.to_s,
+                            biomimic: "TEST" + i.to_s,
+                            zone: "TEST" + i.chr,
+                            sub_zone: "TEST" + i.to_s,
+                            wave_exp: i,
+                            tide_height: i
                            )
   microsite.save!
 

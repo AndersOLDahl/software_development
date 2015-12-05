@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def home
+    @microsite = Microsite.new
     @microsites = Microsite.all
     @hash = Gmaps4rails.build_markers(@microsites) do |microsite, marker|
       marker.lat microsite.field_lat
