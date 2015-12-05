@@ -22,3 +22,7 @@
     <%= select(:microsite, :zone, Microsite.all.collect {|m| m.zone}.uniq.sort, { include_blank: 'Zone' }) %>
     <%= select(:microsite, :sub_zone, Microsite.all.collect {|m| m.sub_zone}.uniq.sort, { include_blank: 'SubZone' }) %>
 </div>
+
+<div id="export-options">
+    <%= link_to('Export CSV', {controller: "readings", format: :csv}, class: "generic-button")%>
+</div>
