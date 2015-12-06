@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def home
+    @microsite = Microsite.new
     @microsites = Microsite.all
     @sites = Microsite.all.collect{|m| m.site}.uniq.sort
     @country = Microsite.all.collect{|m| m.country}.uniq.sort
