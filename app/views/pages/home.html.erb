@@ -110,3 +110,67 @@
 <div id="export-options">
     <%= link_to('Export CSV', {controller: "readings", format: :csv}, class: "generic-button")%>
 </div>
+
+<h1>Listing microsites</h1>
+
+<table>
+  <tr>
+    <th>Mircosite Id</th>
+    <th>Site</th>
+    <th>Field Lat</th>
+    <th>Field Lon</th>
+    <th>Location</th>
+    <th>Country</th>
+    <th>State Province</th>
+    <th>Biomimic</th>
+    <th>Sub Zone</th>
+    <th>Wave Exp</th>
+  </tr>
+
+<% @search_data.each do |microsite| %>
+  <tr>
+    <td><%= microsite.microsite_id %></td>
+    <td><%= microsite.site %></td>
+    <td><%= microsite.field_lat %></td>
+    <td><%= microsite.field_lon %></td>
+    <td><%= microsite.location %></td>
+    <td><%= microsite.country %></td>
+    <td><%= microsite.state_province %></td>
+    <td><%= microsite.biomimic %></td>
+    <td><%= microsite.sub_zone %></td>
+    <td><%= microsite.wave_exp %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<% if @search.pages > 1 %>
+    <p>There are <%= @search.pages %> pages in total </p>
+<% end %>
+<br />
+
+<%= form_for @search, :url => "/pages/home" do |f| %>
+    <%= f.label 'Microsite ID' %>
+    <%= f.text_field 'microsite_id' %><br>
+    <%= f.label 'Site' %>
+    <%= f.text_field 'site' %><br>
+    <%= f.label 'Field Lat' %>
+    <%= f.text_field 'field_lat' %><br>
+    <%= f.label 'Field Lon' %>
+    <%= f.text_field 'field_lon' %><br>
+    <%= f.label 'Location' %>
+    <%= f.text_field 'location' %><br>
+    <%= f.label 'Country' %><br>
+    <%= f.country_select :country, :include_blank => true %><br>
+    <%= f.label 'State Province' %><br>
+    <%= f.text_field 'state_province' %>
+    <%= f.label 'Biomimic' %><br>
+    <%= f.select :biomimic, options_for_select(["Barnacle", "Coral", "Mussel", "Sea Star"]), :include_blank => true %><br>
+    <%= f.label 'Zone' %>
+    <%= f.text_field :zone %><br>
+    <%= f.label :sub_zone %>
+    <%= f.select :sub_zone, options_for_select(["Backreef", "Forereef", "High", "High Mid", "Lagoon", "Low", "Low Mid", "Mid", "Terr"]), :include_blank => true %><br>
+    <%= f.label :wave_exp %>
+    <%= f.select :wave_exp, options_for_select(["Exposed", "Intermediate", "Moderately Exposed", "Protected"]), :include_blank => true %><br>
+    <%= f.submit "search" %>
+<% end %>
