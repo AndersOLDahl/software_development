@@ -7,6 +7,8 @@ class PagesController < ApplicationController
     @state_province = Microsite.all.collect{|m| m.state_province}.uniq.sort
     @zone = Microsite.all.collect{|m| m.zone}.uniq.sort
     @sub_zone = Microsite.all.collect{|m| m.sub_zone}.uniq.sort
+    @biomimic = Microsite.all.collect{|m| m.biomimic}.uniq.sort
+    @wave_exp = Microsite.all.collect{|m| m.wave_exp}.uniq.sort
     @hash = Gmaps4rails.build_markers(@microsites) do |microsite, marker|
       marker.lat microsite.field_lat
       marker.lng microsite.field_lon

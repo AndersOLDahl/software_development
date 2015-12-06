@@ -99,13 +99,16 @@
 
 <div id="map" data-microsites="<%= @hash.to_json %>"></div>
 
-<div id="filters">
+<% if false %>
+<div id="filters"
+<%# Commented out just in case we need it again. %>
     <%= select(:microsite, :site, @sites, {:prompt => "Site"}, {:multiple => true, :class => "select", :id => "site"}) %>
     <%= select(:microsite, :country, @country, {:prompt => "Country"}, {:multiple => true, :class => "select", :id => "country"}) %>
     <%= select(:microsite, :state_province, @state_province, {:prompt => "State/Province"}, {:multiple => true, :class => "select", :id => "state_province"}) %>
     <%= select(:microsite, :zone, @zone, {:prompt => "Zone"}, {:multiple => true, :class => "select", :id => "zone"}) %>
     <%= select(:microsite, :sub_zone, @sub_zone, {:prompt => "SubZone"}, {:multiple => true, :class => "select", :id => "sub_zone"}) %>
 </div>
+<% end %>
 
 <div id="export-options">
     <%= link_to('Export CSV', {controller: "readings", format: :csv}, class: "generic-button")%>
@@ -150,27 +153,27 @@
 <br />
 
 <%= form_for @search, :url => "/pages/home" do |f| %>
-    <%= f.label 'Microsite ID' %>
+    <%= f.label 'Microsite ID' %><br>
     <%= f.text_field 'microsite_id' %><br>
-    <%= f.label 'Site' %>
+    <%= f.label 'Site' %><br>
     <%= f.text_field 'site' %><br>
-    <%= f.label 'Field Lat' %>
+    <%= f.label 'Field Lat' %><br>
     <%= f.text_field 'field_lat' %><br>
-    <%= f.label 'Field Lon' %>
+    <%= f.label 'Field Lon' %><br>
     <%= f.text_field 'field_lon' %><br>
-    <%= f.label 'Location' %>
+    <%= f.label 'Location' %><br>
     <%= f.text_field 'location' %><br>
     <%= f.label 'Country' %><br>
-    <%= f.country_select :country, :include_blank => true %><br>
+    <%= f.select :country, @country, {:prompt => "Country"}, {:multiple => true, :class => "select", :id => "country"} %><br>
     <%= f.label 'State Province' %><br>
-    <%= f.text_field 'state_province' %>
+    <%= f.text_field 'state_province' %><br>
     <%= f.label 'Biomimic' %><br>
-    <%= f.select :biomimic, options_for_select(["Barnacle", "Coral", "Mussel", "Sea Star"]), :include_blank => true %><br>
-    <%= f.label 'Zone' %>
+    <%= f.select :biomimic, @biomimic, {:prompt => "Biomimic"}, {:multiple => true, :class => "select", :id => "biomimic"} %><br>
+    <%= f.label 'Zone' %><br>
     <%= f.text_field :zone %><br>
-    <%= f.label :sub_zone %>
-    <%= f.select :sub_zone, options_for_select(["Backreef", "Forereef", "High", "High Mid", "Lagoon", "Low", "Low Mid", "Mid", "Terr"]), :include_blank => true %><br>
-    <%= f.label :wave_exp %>
-    <%= f.select :wave_exp, options_for_select(["Exposed", "Intermediate", "Moderately Exposed", "Protected"]), :include_blank => true %><br>
+    <%= f.label :sub_zone %><br>
+    <%= f.select :sub_zone, @sub_zone, {:prompt => "SubZone"}, {:multiple => true, :class => "select", :id => "sub_zone"} %><br>
+    <%= f.label :wave_exp %><br>
+    <%= f.select :wave_exp, @wave_exp, {:prompt => "Wave Exposure"}, {:multiple => true, :class => "select", :id => "wave_exp"} %><br>
     <%= f.submit "search" %>
 <% end %>
