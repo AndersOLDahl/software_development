@@ -1,4 +1,34 @@
+<header>
+    <h1>Helmuth Lab Database</h1>
+
+    <% if user_signed_in? %>
+        <div id="admin-login" class="logged-in">
+            <span id="current-user"><%= current_user.email %></span>
+            <%= link_to('Log Out', destroy_user_session_path, method: :delete, class: "generic-button") %>
+        </div>
+    <% else %>
+        <div id="admin-login" class="logged-out">
+            <%= link_to('Log In', new_user_session_path, class: "generic-button") %>
+        </div>
+    <% end %>
+</header>
+
+<div id="map" data-microsites="<%= @hash.to_json %>"></div>
+
+<div id="filters">
+    <%= select(:microsite, :site, Microsite.all.collect {|m| m.site}.uniq.sort, { include_blank: 'Site' }) %>
+    <%= select(:microsite, :country, Microsite.all.collect {|m| m.country}.uniq.sort, { include_blank: 'Country'}) %>
+    <%= select(:microsite, :state_province, Microsite.all.collect {|m| m.state_province}.uniq.sort, { include_blank: 'State/Province' }) %>
+    <%= select(:microsite, :zone, Microsite.all.collect {|m| m.zone}.uniq.sort, { include_blank: 'Zone' }) %>
+    <%= select(:microsite, :sub_zone, Microsite.all.collect {|m| m.sub_zone}.uniq.sort, { include_blank: 'SubZone' }) %>
+</div>
+
+<div id="export-options">
+    <%= link_to('Export CSV', {controller: "readings", format: :csv}, class: "generic-button")%>
+</div>
+
 <div id="admin-panel">
+    <h2>Create Microsite</h2>
     <% if user_signed_in? %>
         <%= form_for @microsite, url: create_microsite_path do |f| %>
             <% flash.each do |key, value| %>
@@ -69,44 +99,17 @@
             </p>
 
         <% end %>
-        <%= form_for(:microsite, url: destroy_microsite_path, html: { multipart: true }) do |f| %>
+        <h2 id="destroy-header">Destroy Microsite</h2>
+        <%= form_for(:microsite, url: destroy_microsite_path, html: {:id => "destroy", multipart: true }) do |f| %>
             <%= f.select :id, options_for_select(Microsite.all.collect {|m| [m.microsite_id, m.id]}.sort) %>
             <%= f.submit "Destroy Microsite" %>
         <% end %>
-        <%= form_for(:reading, url: upload_readings_path, html: { multipart: true }) do |f| %>
+        <h2 id="upload-header">Upload</h2>
+        <%= form_for(:reading, url: upload_readings_path, html: {:id => "upload", multipart: true }) do |f| %>
             <%= select_tag :microsite_id, options_for_select(Microsite.all.collect {|m| [m.microsite_id, m.id]}.sort) %>
             <%= select_tag :date_format, options_for_select(["DayMonthYear", "MonthDayYear", "YearMonthDay"]) %>
             <%= file_field(:file, :data, accept: "text/plain") %>
             <%= submit_tag "Upload text File" %>
         <% end %>
     <% end %>
-</div>
-
-<header>
-    <h1>Helmuth Lab Database</h1>
-
-    <% if user_signed_in? %>
-        <div id="admin-login" class="logged-in">
-            <span id="current-user"><%= current_user.email %></span>
-            <%= link_to('Log Out', destroy_user_session_path, method: :delete, class: "generic-button") %>
-        </div>
-    <% else %>
-        <div id="admin-login" class="logged-out">
-            <%= link_to('Log In', new_user_session_path, class: "generic-button") %>
-        </div>
-    <% end %>
-</header>
-
-<div id="map" data-microsites="<%= @hash.to_json %>"></div>
-
-<div id="filters">
-    <%= select(:microsite, :site, Microsite.all.collect {|m| m.site}.uniq.sort, { include_blank: 'Site' }) %>
-    <%= select(:microsite, :country, Microsite.all.collect {|m| m.country}.uniq.sort, { include_blank: 'Country'}) %>
-    <%= select(:microsite, :state_province, Microsite.all.collect {|m| m.state_province}.uniq.sort, { include_blank: 'State/Province' }) %>
-    <%= select(:microsite, :zone, Microsite.all.collect {|m| m.zone}.uniq.sort, { include_blank: 'Zone' }) %>
-    <%= select(:microsite, :sub_zone, Microsite.all.collect {|m| m.sub_zone}.uniq.sort, { include_blank: 'SubZone' }) %>
-</div>
-
-<div id="export-options">
-    <%= link_to('Export CSV', {controller: "readings", format: :csv}, class: "generic-button")%>
 </div>

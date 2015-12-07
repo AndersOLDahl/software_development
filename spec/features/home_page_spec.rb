@@ -11,12 +11,12 @@ feature "Check Home Page", :type => :feature do
   end
 
   scenario "Has Site" do
-    visit "/"
+    #visit "/"
     expect(page).to have_select('microsite_site')
   end
 
   scenario "Has Country" do
-    visit "/"
+    #visit "/"
     expect(page).to have_select('microsite_country')
   end
 
@@ -34,4 +34,5 @@ feature "Check Home Page", :type => :feature do
     visit "/"
     expect(page).to have_select('microsite_sub_zone')
   end
+
 end
