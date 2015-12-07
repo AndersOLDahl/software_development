@@ -97,16 +97,77 @@
     <% end %>
 </header>
 
+<table class="table table-hover table-bordered">
+  <tr>
+    <th>Microsite Id</th>
+    <th>Site</th>
+    <th>Field Lat</th>
+    <th>Field Lon</th>
+    <th>Location</th>
+    <th>Country</th>
+    <th>State Province</th>
+    <th>Biomimic</th>
+    <th>Zone</th>
+    <th>Sub Zone</th>
+    <th>Wave Exp</th>
+  </tr>
+
+<% @search_data.each do |microsite| %>
+  <tr>
+    <td><%= microsite.microsite_id %></td>
+    <td><%= microsite.site %></td>
+    <td><%= microsite.field_lat %></td>
+    <td><%= microsite.field_lon %></td>
+    <td><%= microsite.location %></td>
+    <td><%= microsite.country %></td>
+    <td><%= microsite.state_province %></td>
+    <td><%= microsite.biomimic %></td>
+    <td><%= microsite.zone %></td>
+    <td><%= microsite.sub_zone %></td>
+    <td><%= microsite.wave_exp %></td>
+  </tr>
+<% end %>
+</table>
+
+<% if @search.pages > 1 %>
+    <p>There are <%= @search.pages %> pages in total </p>
+<% end %>
+<br />
+
+<%= form_for @search, :url => "/pages/home", :html => {:class => "form-inline main-search"} do |f| %>
+    <div class="form-group">
+        <%= f.label 'Site' %>
+        <%= f.text_field 'site', placeholder: "Site", class: 'form-control input-sm' %>
+    </div>
+    <div class="form-group">
+        <%= f.label 'State/Province' %>
+        <%= f.text_field 'state_province', placeholder: "State/Province", class: 'form-control input-sm' %>
+    </div>
+    <div class="form-group">
+        <%= f.label 'Zone' %>
+        <%= f.text_field :zone, placeholder: "Zone", class: 'form-control input-sm' %>
+    </div><br>
+    <div class="form-group">
+        <%= f.label 'Country' %>
+        <%= f.select :country, @country, {:prompt => "Country"}, {:multiple => true, :class => "select", :id => "country"} %><br>
+    </div>
+    <div class="form-group">
+        <%= f.label 'Biomimic' %>
+        <%= f.select :biomimic, @biomimic, {:prompt => "Biomimic"}, {:multiple => true, :class => "select", :id => "biomimic"} %><br>
+    </div>
+    <div class="form-group">
+        <%= f.label :sub_zone %>
+        <%= f.select :sub_zone, @sub_zone, {:prompt => "SubZone"}, {:multiple => true, :class => "select", :id => "sub_zone"} %><br>
+    </div>
+    <div class="form-group">
+        <%= f.label :wave_exp %>
+        <%= f.select :wave_exp, @wave_exp, {:prompt => "Wave Exposure"}, {:multiple => true, :class => "select", :id => "wave_exp"} %><br>
+    </div><br>
+    <%= f.submit "Search", class: "btn btn-default btn-md main-search-submit" %>
+    <%= link_to('Export CSV', {controller: "readings", format: :csv}, class: "btn btn-default btn-md main-search-submit")%>
+<% end %>
+
 <div id="map" data-microsites="<%= @hash.to_json %>"></div>
-
-<div id="filters">
-    <%= select(:microsite, :site, Microsite.all.collect {|m| m.site}.uniq.sort, { include_blank: 'Site' }) %>
-    <%= select(:microsite, :country, Microsite.all.collect {|m| m.country}.uniq.sort, { include_blank: 'Country'}) %>
-    <%= select(:microsite, :state_province, Microsite.all.collect {|m| m.state_province}.uniq.sort, { include_blank: 'State/Province' }) %>
-    <%= select(:microsite, :zone, Microsite.all.collect {|m| m.zone}.uniq.sort, { include_blank: 'Zone' }) %>
-    <%= select(:microsite, :sub_zone, Microsite.all.collect {|m| m.sub_zone}.uniq.sort, { include_blank: 'SubZone' }) %>
-</div>
-
 <%= line_chart Microsite.all.first(10).collect { |m|
     {name: m.id, data: Reading.where(microsite_id: m.id).collect { |r|
         [r.timestamp, r.temperature]
@@ -125,7 +186,3 @@ library: {
         labels: {format: "{value}º"}
     }
 }%>
-
-<div id="export-options">
-    <%= link_to('Export CSV', {controller: "readings", format: :csv}, class: "generic-button")%>
-</div>

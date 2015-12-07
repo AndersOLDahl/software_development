@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   match '/microsite/create' => 'microsites#create', :as => :create_microsite, via: [:post]
   match '/microsite/destroy' => 'microsites#destroy', :as => :destroy_microsite, via: [:destroy, :post]
   match '/reading/upload' => 'readings#upload', :as => :upload_readings, via: [:post]
-
+  match '/pages/home'=> 'pages#home', via: [:post, :get]
   get 'readings' => 'readings#index'
 
   devise_for :users, :skip => :registrations

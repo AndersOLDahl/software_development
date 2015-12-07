@@ -1,5 +1,3 @@
-require 'date'
-
 class MicrositesController < ApplicationController
   def create
     if user_signed_in?
@@ -18,10 +16,6 @@ class MicrositesController < ApplicationController
   end
 
   private
-
-  def string_to_datetime(string,format="%m/%d/%Y %H:%M")
-    DateTime.strptime(string, format).to_time unless string.blank?
-  end
 
   def microsite_params
     params.require(:microsite).permit(:site, :field_lat, :field_lon, :location, :country, :state_province, :biomimic, :zone, :sub_zone, :wave_exp, :tide_height)
