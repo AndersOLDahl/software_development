@@ -11,11 +11,6 @@ class PagesController < ApplicationController
     @search = Search.new(:microsite, params[:search], per_page: 5)
     @search.order = 'microsite_id'
     @search_data = @search.run
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @search_data }
-    end
   end
   def myinfowindow(site, lat, lng, location)
     "<div class=\"info-box\">
