@@ -17,10 +17,6 @@ class MicrositesController < ApplicationController
 
   private
 
-  def string_to_datetime(string,format="%m/%d/%Y %H:%M")
-    DateTime.strptime(string, format).to_time unless string.blank?
-  end
-
   def microsite_params
     params.require(:microsite).permit(:site, :field_lat, :field_lon, :location, :country, :state_province, :biomimic, :zone, :sub_zone, :wave_exp, :tide_height)
   end
