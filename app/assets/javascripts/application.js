@@ -17,5 +17,7 @@
 //= require underscore
 //= require bootstrap-sprockets
 //= require gmaps/google
+//= require highcharts
+//= require chartkick
 //= require_tree .
 //= require select2
