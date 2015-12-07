@@ -13,12 +13,12 @@ class ReadingsController < ApplicationController
       time_data_format = params[:date_format]
 
       if user_signed_in?
-        uploaded_file = params[:file][:data]
-        @file_content = uploaded_file.read
-        @file_content = @file_content.tr('/', '-').split(/\r?\n/).map { |s| s.to_s.split(/\t/) }.drop(1)
-
         if (time_data_format == "DayMonthYear")
           begin
+            uploaded_file = params[:file][:data]
+            @file_content = uploaded_file.read
+            @file_content = @file_content.tr('/', '-').split(/\r?\n/).map { |s| s.to_s.split(/\t/) }.drop(1)
+
             ## Handle 28-12-2005 and 28/12/2005
             @file_content = @file_content.map {|time, temp| [DateTime.strptime(time, '%d-%m-%Y %H:%M').utc, temp.to_f]}
             @file_content.each { |x| Microsite.find(params[:microsite_id]).readings.build(timestamp: x[0], temperature: x[1]).save  }
@@ -28,6 +28,10 @@ class ReadingsController < ApplicationController
           end
         elsif (time_data_format == "MonthDayYear")
           begin
+            uploaded_file = params[:file][:data]
+            @file_content = uploaded_file.read
+            @file_content = @file_content.tr('/', '-').split(/\r?\n/).map { |s| s.to_s.split(/\t/) }.drop(1)
+
             ## Handle 12-28-2005 and 12/28/2005
             @file_content = @file_content.map {|time, temp| [DateTime.strptime(time, '%m-%d-%Y %H:%M').utc, temp.to_f]}
             @file_content.each { |x| Microsite.find(params[:microsite_id]).readings.build(timestamp: x[0], temperature: x[1]).save  }
@@ -37,6 +41,10 @@ class ReadingsController < ApplicationController
           end
         elsif (time_data_format == "YearMonthDay")
           begin
+            uploaded_file = params[:file][:data]
+            @file_content = uploaded_file.read
+            @file_content = @file_content.tr('/', '-').split(/\r?\n/).map { |s| s.to_s.split(/\t/) }.drop(1)
+
             ## Handle 2005-12-28 and 2005/12/28
             @file_content = @file_content.map {|time, temp| [DateTime.strptime(time, '%Y-%m-%d %H:%M').utc, temp.to_f]}
             @file_content.each { |x| Microsite.find(params[:microsite_id]).readings.build(timestamp: x[0], temperature: x[1]).save  }

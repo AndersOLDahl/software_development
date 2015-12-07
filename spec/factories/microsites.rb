@@ -11,6 +11,11 @@ FactoryGirl.define do
     sub_zone        "Test sub_zone"
     wave_exp        1.5
     tide_height     1.5
-    association :readings
+
+    factory :microsite_with_reading do
+      after(:create) do |microsite|
+        create(:reading, microsite: microsite)
+      end
+    end
   end
 end
