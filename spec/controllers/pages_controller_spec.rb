@@ -1,7 +1,13 @@
 require 'spec_helper'
 
 describe PagesController do
-  describe "GET home" do
+    before do
+        RSpec::Mocks.configuration.allow_message_expectations_on_nil = true
+        user = build(:user)
+        allow(request.env['warden']).to receive(:authenticate!).and_return(user)
+        allow(controller).to receive(:current_user).and_return(user)
+    end
+    describe "GET home" do
     it "assigns @microsite" do
       get :home
       expect(assigns(:microsites)).not_to be_nil
