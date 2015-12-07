@@ -7,7 +7,7 @@ class PagesController < ApplicationController
       marker.lng microsite.field_lon
       marker.infowindow myinfowindow(microsite.site, microsite.field_lat, microsite.field_lon, microsite.location)
 
-    @search = Search.new(:microsite, params[:search])
+    @search = Search.new(:microsite, params[:search], per_page: 5)
     @search.order = 'microsite_id'
     @search_data = @search.run
     end

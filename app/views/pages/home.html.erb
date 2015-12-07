@@ -174,29 +174,8 @@
         <%= f.label :wave_exp %>
         <%= f.select :wave_exp, options_for_select(["Exposed", "Intermediate", "Moderately Exposed", "Protected"]), :include_blank => true %>
     </div><br>
-    <%= f.submit "search", class: "btn btn-default btn-md" %>
+    <%= f.submit "Search", class: "btn btn-default btn-md main-search-submit" %>
+    <%= link_to('Export CSV', {controller: "readings", format: :csv}, class: "btn btn-default btn-md main-search-submit")%>
 <% end %>
-
-<br />
-<% if @search.pages > 1 %>
-    <p>There are <%= @search.pages %> pages in total </p>
-<% end %>
-<br />
 
 <div id="map" data-microsites="<%= @hash.to_json %>"></div>
-
-<div id="filters">
-    <%= select(:microsite, :site, Microsite.all.collect {|m| m.site}.uniq.sort, { include_blank: 'Site' }) %>
-    <%= select(:microsite, :country, Microsite.all.collect {|m| m.country}.uniq.sort, { include_blank: 'Country'}) %>
-    <%= select(:microsite, :state_province, Microsite.all.collect {|m| m.state_province}.uniq.sort, { include_blank: 'State/Province' }) %>
-    <%= select(:microsite, :zone, Microsite.all.collect {|m| m.zone}.uniq.sort, { include_blank: 'Zone' }) %>
-    <%= select(:microsite, :sub_zone, Microsite.all.collect {|m| m.sub_zone}.uniq.sort, { include_blank: 'SubZone' }) %>
-</div>
-
-<div id="export-options">
-    <%= link_to('Export CSV', {controller: "readings", format: :csv}, class: "generic-button")%>
-</div>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-<script src="paging.js"></script>
