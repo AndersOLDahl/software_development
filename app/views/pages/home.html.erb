@@ -1,9 +1,6 @@
 <div id="admin-panel">
     <% if user_signed_in? %>
         <%= form_for @microsite, url: create_microsite_path do |f| %>
-            <% flash.each do |key, value| %>
-                <%= content_tag :div, value, class: "flash #{key}" %>
-            <% end %>
             <p>
             <%= f.label :microsite_id %><br>
             <%= f.text_field :microsite_id %>

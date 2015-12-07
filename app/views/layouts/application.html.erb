@@ -9,9 +9,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %> fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <%= value %>
+    </div>
+  <% end %>
   <%= yield %>
 </body>
 </html>

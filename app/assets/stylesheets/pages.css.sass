@@ -36,7 +36,7 @@ header
     right: 100px
     left: 0
     bottom: 10px
-    
+
     padding: 5px 10px
     text-align: right
     +ellipsis
@@ -67,28 +67,38 @@ header
   width: 800px
 
 #export-options
-  .generic-button
-    width: 120px
-    margin: 0 auto
-
-// Using !important to force override defaults
-.notice
-  margin: 0 -30px
-  padding: 3px 30px !important
-  border-radius: 0 !important
-  
-  border-bottom: 1px solid lighten($notice-color, 50%) !important
-  background-color: lighten($notice-color, 60%) !important
-  color: $notice-color
-
-  &:empty
-    display: none
+.generic-button
+  width: 120px
+  margin: 0 auto
 
 .alert
-  @extend .notice
-  border-bottom-color: lighten($alert-color, 50%) !important
-  background-color: lighten($alert-color, 60%) !important
-  color: $alert-color !important
+  padding: 8px 35px 8px 14px
+  margin-bottom: 18px
+  color: #c09853
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5)
+  background-color: #fcf8e3
+  border: 1px solid #fbeed5
+  -webkit-border-radius: 4px
+  -moz-border-radius: 4px
+  border-radius: 4px
+
+.alert-heading
+  color: inherit
+
+.alert .close
+  position: relative
+  top: -2px
+  line-height: 18px
+
+.alert-danger, .alert-error
+  color: #b94a48
+  background-color: #f2dede
+  border-color: #eed3d7
+
+.alert-info
+  color: #3a87ad
+  background-color: #d9edf7
+  border-color: #bce8f1
 
 .main-search
   text-align: center
