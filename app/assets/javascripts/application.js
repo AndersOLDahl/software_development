@@ -18,3 +18,4 @@
 //= require bootstrap-sprockets
 //= require gmaps/google
 //= require_tree .
+//= require select2
