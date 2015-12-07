@@ -1,6 +1,9 @@
 class ReadingsController < ApplicationController
 
     def index
+        # Include microsite data by default
+        @include_microsites = (params["include_microsites"] || 'true').casecmp('true') == 0
+
         respond_to do |format|
             format.csv {render_csv}
         end
@@ -53,7 +56,7 @@ class ReadingsController < ApplicationController
         set_file_headers
         set_streaming_headers
 
-        response.status=200
+        response.status = :ok
 
         self.response_body = csv_lines
     end
@@ -73,11 +76,42 @@ class ReadingsController < ApplicationController
 
     def csv_lines
         Enumerator.new do |y|
-            y << Reading.csv_header.to_s
+            # Write the header line to the CSV
+            y << Reading.csv_header(@include_microsites).to_s
 
-            Reading.all.each do |reading|
-                y << reading.to_csv_row.to_s
+            # Iterate over matching readings. find_each is used to retrieve records in batches to save memory.
+            filtered_readings.find_each do |reading|
+                y << reading.to_csv_row(@include_microsites).to_s
             end
         end
+    end
+
+    def filtered_readings
+        # Start with an inner join of Readings and Microsites
+        readings = Reading.joins(:microsite)
+
+        if params.has_key? 'start_time'
+            # Only show readings at or after start_time, if provided
+            readings = readings.where('timestamp >= to_timestamp(?)', params["start_time"])
+        end
+
+        if params.has_key? 'end_time'
+            # Only show readings before end_time, if provided
+            readings = readings.where('timestamp < to_timestamp(?)', params["end_time"])
+        end
+
+        # Take just the valid filters for the microsites table
+        microsite_filters = params.slice('site', 'state_province', 'country', 'biomimic', 'zone', 'sub_zone', 'wave_exp', 'tide_height')
+        if !microsite_filters.empty?
+            # Filter the readings by microsites if any remain (an empty where clause would result in 0 records)
+            readings = readings.where(microsites: microsite_filters)
+        end
+
+        if @include_microsites
+            # Tell ActiveRecord we will be using the microsite data to improve query efficiency.
+            readings = readings.includes(:microsite)
+        end
+
+        return readings
     end
 end
