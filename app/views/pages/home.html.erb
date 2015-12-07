@@ -129,26 +129,14 @@
 <% end %>
 </table>
 
+<% if @search.pages > 1 %>
+    <p>There are <%= @search.pages %> pages in total </p>
+<% end %>
+
 <%= form_for @search, :url => "/pages/home", :html => {:class => "form-inline main-search"} do |f| %>
-    <div class="form-group">
-        <%= f.label 'Microsite ID' %>
-        <%= f.text_field 'microsite_id', placeholder: "Id", class: 'form-control input-sm' %>
-    </div>
     <div class="form-group">
         <%= f.label 'Site' %>
         <%= f.text_field 'site', placeholder: "Site", class: 'form-control input-sm' %>
-    </div>
-    <div class="form-group">
-        <%= f.label 'Field Lat' %>
-        <%= f.text_field 'field_lat', placeholder: "Lat", class: 'form-control input-sm' %>
-    </div>
-    <div class="form-group">
-        <%= f.label 'Field Lon' %>
-        <%= f.text_field 'field_lon', placeholder: "Lon", class: 'form-control input-sm' %>
-    </div>
-    <div class="form-group">
-        <%= f.label 'Location' %>
-        <%= f.text_field 'location', placeholder: "Location", class: 'form-control input-sm' %>
     </div>
     <div class="form-group">
         <%= f.label 'State Province' %>
