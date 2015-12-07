@@ -97,28 +97,9 @@
     <% end %>
 </header>
 
-<div id="map" data-microsites="<%= @hash.to_json %>"></div>
-
-<% if false %>
-<div id="filters"
-<%# Commented out just in case we need it again. %>
-    <%= select(:microsite, :site, @sites, {:prompt => "Site"}, {:multiple => true, :class => "select", :id => "site"}) %>
-    <%= select(:microsite, :country, @country, {:prompt => "Country"}, {:multiple => true, :class => "select", :id => "country"}) %>
-    <%= select(:microsite, :state_province, @state_province, {:prompt => "State/Province"}, {:multiple => true, :class => "select", :id => "state_province"}) %>
-    <%= select(:microsite, :zone, @zone, {:prompt => "Zone"}, {:multiple => true, :class => "select", :id => "zone"}) %>
-    <%= select(:microsite, :sub_zone, @sub_zone, {:prompt => "SubZone"}, {:multiple => true, :class => "select", :id => "sub_zone"}) %>
-</div>
-<% end %>
-
-<div id="export-options">
-    <%= link_to('Export CSV', {controller: "readings", format: :csv}, class: "generic-button")%>
-</div>
-
-<h1>Listing microsites</h1>
-
-<table>
+<table class="table table-hover table-bordered">
   <tr>
-    <th>Mircosite Id</th>
+    <th>Microsite Id</th>
     <th>Site</th>
     <th>Field Lat</th>
     <th>Field Lon</th>
@@ -126,6 +107,7 @@
     <th>Country</th>
     <th>State Province</th>
     <th>Biomimic</th>
+    <th>Zone</th>
     <th>Sub Zone</th>
     <th>Wave Exp</th>
   </tr>
@@ -140,40 +122,49 @@
     <td><%= microsite.country %></td>
     <td><%= microsite.state_province %></td>
     <td><%= microsite.biomimic %></td>
+    <td><%= microsite.zone %></td>
     <td><%= microsite.sub_zone %></td>
     <td><%= microsite.wave_exp %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
 <% if @search.pages > 1 %>
     <p>There are <%= @search.pages %> pages in total </p>
 <% end %>
 <br />
 
-<%= form_for @search, :url => "/pages/home" do |f| %>
-    <%= f.label 'Microsite ID' %><br>
-    <%= f.text_field 'microsite_id' %><br>
-    <%= f.label 'Site' %><br>
-    <%= f.text_field 'site' %><br>
-    <%= f.label 'Field Lat' %><br>
-    <%= f.text_field 'field_lat' %><br>
-    <%= f.label 'Field Lon' %><br>
-    <%= f.text_field 'field_lon' %><br>
-    <%= f.label 'Location' %><br>
-    <%= f.text_field 'location' %><br>
-    <%= f.label 'Country' %><br>
-    <%= f.select :country, @country, {:prompt => "Country"}, {:multiple => true, :class => "select", :id => "country"} %><br>
-    <%= f.label 'State Province' %><br>
-    <%= f.text_field 'state_province' %><br>
-    <%= f.label 'Biomimic' %><br>
-    <%= f.select :biomimic, @biomimic, {:prompt => "Biomimic"}, {:multiple => true, :class => "select", :id => "biomimic"} %><br>
-    <%= f.label 'Zone' %><br>
-    <%= f.text_field :zone %><br>
-    <%= f.label :sub_zone %><br>
-    <%= f.select :sub_zone, @sub_zone, {:prompt => "SubZone"}, {:multiple => true, :class => "select", :id => "sub_zone"} %><br>
-    <%= f.label :wave_exp %><br>
-    <%= f.select :wave_exp, @wave_exp, {:prompt => "Wave Exposure"}, {:multiple => true, :class => "select", :id => "wave_exp"} %><br>
-    <%= f.submit "search" %>
+<%= form_for @search, :url => "/pages/home", :html => {:class => "form-inline main-search"} do |f| %>
+    <div class="form-group">
+        <%= f.label 'Site' %>
+        <%= f.text_field 'site', placeholder: "Site", class: 'form-control input-sm' %>
+    </div>
+    <div class="form-group">
+        <%= f.label 'State/Province' %>
+        <%= f.text_field 'state_province', placeholder: "State/Province", class: 'form-control input-sm' %>
+    </div>
+    <div class="form-group">
+        <%= f.label 'Zone' %>
+        <%= f.text_field :zone, placeholder: "Zone", class: 'form-control input-sm' %>
+    </div><br>
+    <div class="form-group">
+        <%= f.label 'Country' %>
+        <%= f.select :country, @country, {:prompt => "Country"}, {:multiple => true, :class => "select", :id => "country"} %><br>
+    </div>
+    <div class="form-group">
+        <%= f.label 'Biomimic' %>
+        <%= f.select :biomimic, @biomimic, {:prompt => "Biomimic"}, {:multiple => true, :class => "select", :id => "biomimic"} %><br>
+    </div>
+    <div class="form-group">
+        <%= f.label :sub_zone %>
+        <%= f.select :sub_zone, @sub_zone, {:prompt => "SubZone"}, {:multiple => true, :class => "select", :id => "sub_zone"} %><br>
+    </div>
+    <div class="form-group">
+        <%= f.label :wave_exp %>
+        <%= f.select :wave_exp, @wave_exp, {:prompt => "Wave Exposure"}, {:multiple => true, :class => "select", :id => "wave_exp"} %><br>
+    </div><br>
+    <%= f.submit "Search", class: "btn btn-default btn-md main-search-submit" %>
+    <%= link_to('Export CSV', {controller: "readings", format: :csv}, class: "btn btn-default btn-md main-search-submit")%>
 <% end %>
+
+<div id="map" data-microsites="<%= @hash.to_json %>"></div>

@@ -13,11 +13,11 @@ class PagesController < ApplicationController
       marker.lat microsite.field_lat
       marker.lng microsite.field_lon
       marker.infowindow myinfowindow(microsite.site, microsite.field_lat, microsite.field_lon, microsite.location)
+    end
 
-    @search = Search.new(:microsite, params[:search], :per_page => 20)
+    @search = Search.new(:microsite, params[:search], per_page: 5)
     @search.order = 'microsite_id'
     @search_data = @search.run
-    end
   end
   def myinfowindow(site, lat, lng, location)
     "<div class=\"info-box\">
