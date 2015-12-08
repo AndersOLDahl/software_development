@@ -1,7 +1,7 @@
 require "spec_helper"
 
 feature "Check Home Page", :type => :feature do
-  
+
   scenario "Check Header" do
     visit "/"
     expect(page).to have_text("Helmuth Lab Database")
@@ -22,7 +22,7 @@ feature "Check Home Page", :type => :feature do
 
   scenario "Has State" do
     visit "/"
-    expect(page).to have_field('State/Province')
+    expect(page).to have_field('State / Province')
   end
 
   scenario "Has Zone" do
