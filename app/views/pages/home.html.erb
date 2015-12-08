@@ -47,6 +47,7 @@
 <% end %>
 
 <div id="map" data-microsites="<%= @hash.to_json %>"></div>
+
 <%= line_chart Microsite.all.first(10).collect { |m|
     {name: m.id, data: Reading.where(microsite_id: m.id).collect { |r|
         [r.timestamp, r.temperature]
