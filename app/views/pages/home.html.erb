@@ -131,7 +131,7 @@
 <% end %>
 <br />
 
-<%= form_for @search, :url => "/pages/home", :html => {:class => "form-inline main-search"} do |f| %>
+<%= form_for @search, :url => "/pages/home", :html => {:id => "main-search", :class => "form-inline main-search"} do |f| %>
     <div class="form-group">
         <%= f.label 'Site' %>
         <%= f.text_field 'site', placeholder: "Site", class: 'form-control input-sm' %>
@@ -160,8 +160,8 @@
         <%= f.label :wave_exp %>
         <%= f.select :wave_exp, @wave_exp, {:prompt => "Wave Exposure"}, {:multiple => true, :class => "select", :id => "wave_exp"} %><br>
     </div><br>
-    <%= f.submit "Search", class: "btn btn-default btn-md main-search-submit" %>
-    <%= link_to('Export CSV', {controller: "readings", format: :csv}, class: "btn btn-default btn-md main-search-submit")%>
+    <%= f.submit "Search", class: "btn btn-default btn-md main-search-submit"%>
+    <%= link_to('Export CSV', '#', class: "btn btn-default btn-md main-search-submit", onclick: "updateFilter(this)")%>
 <% end %>
 
 <div id="map" data-microsites="<%= @hash.to_json %>"></div>
