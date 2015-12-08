@@ -11,10 +11,10 @@ function updateFilter(options) {
     //Where they are in the form
     var site = form[2].value;
     var state_province = form[3].value;
-    var zone = form[4].value;
-    var country = form[6].selectedOptions;
-    var biomimic = form[9].selectedOptions;
-    var sub_zone = form[12].selectedOptions;
+    var zone = form[7].value;
+    var country = form[5].selectedOptions;
+    var biomimic = form[12].selectedOptions;
+    var sub_zone = form[9].selectedOptions;
     var wave_exp = form[15].selectedOptions;
 
     console.log(site);
