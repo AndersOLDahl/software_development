@@ -6,7 +6,7 @@
             
         </div>
         <div id="admin-login" class="logged-in">
-            <span id="current-user"><%= current_user.email %></span>
+            <span id="current-user"><%= link_to(current_user.email, '/') %></span>
             <%= link_to('Log Out', destroy_user_session_path, method: :delete, class: "generic-button") %>
         </div>
     <% else %>
@@ -20,69 +20,69 @@
     <div id="create-microsite" class="admin-panel left-column">
         <h3>New Microsite</h3>
         <hr />
-        <%= form_for @microsite, url: create_microsite_path do |f| %>
+        <%= form_for @microsite, url: create_microsite_path, :html => {:class => "form-inline"} do |f| %>
             <p>
             <%= f.label :microsite_id, "Microsite ID" %><br>
-            <%= f.text_field :microsite_id %>
+            <%= f.text_field :microsite_id, class: 'form-control input-sm' %>
             </p>
 
             <p>
             <%= f.label :site %><br>
-            <%= f.text_field :site %>
+            <%= f.text_field :site, class: 'form-control input-sm' %>
             </p>
 
             <p>
             <%= f.label :field_lat, "Field Latitude" %><br>
-            <%= f.text_field :field_lat %>
+            <%= f.text_field :field_lat, class: 'form-control input-sm' %>
             </p>
 
             <p>
             <%= f.label :field_lon, "Field Longitude" %><br>
-            <%= f.text_field :field_lon %>
+            <%= f.text_field :field_lon, class: 'form-control input-sm' %>
             </p>
 
             <p>
             <%= f.label :location %><br>
-            <%= f.text_field :location %>
+            <%= f.text_field :location, class: 'form-control input-sm' %>
             </p>
 
             <p>
             <%= f.label :country %><br>
-            <%= f.country_select :country %>
+            <%= f.country_select :country, class: 'form-control input-sm' %>
             </p>
 
             <p>
             <%= f.label :state_province, "State / Province" %><br>
-            <%= f.text_field :state_province %>
+            <%= f.text_field :state_province, class: 'form-control input-sm' %>
             </p>
 
             <p>
             <%= f.label :biomimic %><br>
-            <%= f.select :biomimic, options_for_select(["Barnacle", "Coral", "Mussel", "Sea Star"]) %>
+            <%= f.select :biomimic, options_for_select(["Barnacle", "Coral", "Mussel", "Sea Star"], class: 'form-control input-sm') %>
             </p>
 
             <p>
             <%= f.label :zone %><br>
-            <%= f.text_field :zone %>
+            <%= f.text_field :zone, class: 'form-control input-sm' %>
             </p>
 
             <p>
             <%= f.label :sub_zone, "Sub-Zone" %><br>
-            <%= f.select :sub_zone, options_for_select(["Backreef", "Forereef", "High", "High Mid", "Lagoon", "Low", "Low Mid", "Mid", "Terr"])  %>
+            <%= f.select :sub_zone, options_for_select(["Backreef", "Forereef", "High", "High Mid", "Lagoon", "Low", "Low Mid", "Mid", "Terr"], class: 'form-control input-sm')  %>
             </p>
 
             <p>
             <%= f.label :wave_exp, "Wave Exposure" %><br>
-            <%= f.select :wave_exp, options_for_select(["Exposed", "Intermediate",         "Moderately Exposed", "Protected"]) %>
+            <%= f.select :wave_exp, options_for_select(["Exposed", "Intermediate", "Moderately Exposed", "Protected"], class: 'form-control input-sm') %>
             </p>
 
             <p>
             <%= f.label :tide_height, "Tide Height" %><br>
-            <%= f.text_field :tide_height %>
+            <%= f.text_field :tide_height, class: 'form-control input-sm' %>
             </p>
 
             <p>
-            <%= f.submit %>
+            <%= f.submit "Create Microsite", class: "btn btn-success btn-md" %>
             </p>
         <% end %>
     </div>
@@ -95,7 +95,7 @@
                     <%= f.label :microsite_id, "Microsite ID" %><br>
                     <%= f.select :id, options_for_select(Microsite.all.collect {|m| [m.microsite_id, m.id]}.sort) %>
                 </p>
-                <%= f.submit "Destroy Microsite" %>
+                <%= f.submit "Destroy Microsite", class: "btn btn-danger btn-md" %>
             <% end %>
         </div>
         <div id="upload-readings" class="admin-panel">
@@ -113,7 +113,7 @@
                 <p>
                     <%= file_field(:file, :data, accept: "text/plain") %>
                 </p>
-                <%= submit_tag "Upload text File" %>
+                <%= submit_tag "Upload text File", class: "btn btn-success btn-md" %>
             <% end %>
         </div>
     </div>

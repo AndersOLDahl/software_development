@@ -27,7 +27,7 @@ class MicrositesController < ApplicationController
     private
 
     def microsite_params
-        params.require(:microsite).permit(:site, :field_lat, :field_lon, :location, :country, :state_province, :biomimic, :zone, :sub_zone, :wave_exp, :tide_height)
+        params.require(:microsite).permit(:microsite_id, :site, :field_lat, :field_lon, :location, :country, :state_province, :biomimic, :zone, :sub_zone, :wave_exp, :tide_height)
     end
 
     def filtered_microsites
