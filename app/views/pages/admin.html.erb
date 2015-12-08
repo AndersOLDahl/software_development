@@ -1,0 +1,123 @@
+<header>
+    <h1>Helmuth Lab Database</h1>
+
+    <% if user_signed_in? %>
+        <div id="admin-tools">
+            
+        </div>
+        <div id="admin-login" class="logged-in">
+            <span id="current-user"><%= current_user.email %></span>
+            <%= link_to('Log Out', destroy_user_session_path, method: :delete, class: "generic-button") %>
+        </div>
+    <% else %>
+        <div id="admin-login" class="logged-out">
+            <%= link_to('Log In', new_user_session_path, class: "generic-button") %>
+        </div>
+    <% end %>
+</header>
+
+<% if user_signed_in? %>
+    <div id="create-microsite" class="admin-panel left-column">
+        <h3>New Microsite</h3>
+        <hr />
+        <%= form_for @microsite, url: create_microsite_path do |f| %>
+            <p>
+            <%= f.label :microsite_id, "Microsite ID" %><br>
+            <%= f.text_field :microsite_id %>
+            </p>
+
+            <p>
+            <%= f.label :site %><br>
+            <%= f.text_field :site %>
+            </p>
+
+            <p>
+            <%= f.label :field_lat, "Field Latitude" %><br>
+            <%= f.text_field :field_lat %>
+            </p>
+
+            <p>
+            <%= f.label :field_lon, "Field Longitude" %><br>
+            <%= f.text_field :field_lon %>
+            </p>
+
+            <p>
+            <%= f.label :location %><br>
+            <%= f.text_field :location %>
+            </p>
+
+            <p>
+            <%= f.label :country %><br>
+            <%= f.country_select :country %>
+            </p>
+
+            <p>
+            <%= f.label :state_province, "State / Province" %><br>
+            <%= f.text_field :state_province %>
+            </p>
+
+            <p>
+            <%= f.label :biomimic %><br>
+            <%= f.select :biomimic, options_for_select(["Barnacle", "Coral", "Mussel", "Sea Star"]) %>
+            </p>
+
+            <p>
+            <%= f.label :zone %><br>
+            <%= f.text_field :zone %>
+            </p>
+
+            <p>
+            <%= f.label :sub_zone, "Sub-Zone" %><br>
+            <%= f.select :sub_zone, options_for_select(["Backreef", "Forereef", "High", "High Mid", "Lagoon", "Low", "Low Mid", "Mid", "Terr"])  %>
+            </p>
+
+            <p>
+            <%= f.label :wave_exp, "Wave Exposure" %><br>
+            <%= f.select :wave_exp, options_for_select(["Exposed", "Intermediate",         "Moderately Exposed", "Protected"]) %>
+            </p>
+
+            <p>
+            <%= f.label :tide_height, "Tide Height" %><br>
+            <%= f.text_field :tide_height %>
+            </p>
+
+            <p>
+            <%= f.submit %>
+            </p>
+        <% end %>
+    </div>
+    <div class="right-column">
+        <div id="destroy-microsite" class="admin-panel">
+            <h3>Delete Microsite</h3>
+            <hr />
+            <%= form_for(:microsite, url: destroy_microsite_path, html: { multipart: true }) do |f| %>
+                <p>
+                    <%= f.label :microsite_id, "Microsite ID" %><br>
+                    <%= f.select :id, options_for_select(Microsite.all.collect {|m| [m.microsite_id, m.id]}.sort) %>
+                </p>
+                <%= f.submit "Destroy Microsite" %>
+            <% end %>
+        </div>
+        <div id="upload-readings" class="admin-panel">
+            <h3>Upload Readings</h3>
+            <hr />
+            <%= form_for(:reading, url: upload_readings_path, html: { multipart: true }) do |f| %>
+                <p>
+                    <%= f.label :microsite_id, "Microsite ID" %><br>
+                    <%= select_tag :microsite_id, options_for_select(Microsite.all.collect {|m| [m.microsite_id, m.id]}.sort) %>
+                </p>
+                <p>
+                    <%= f.label :date_format, "Date Format" %><br>
+                    <%= select_tag :date_format, options_for_select(["DayMonthYear", "MonthDayYear", "YearMonthDay"]) %>
+                </p>
+                <p>
+                    <%= file_field(:file, :data, accept: "text/plain") %>
+                </p>
+                <%= submit_tag "Upload text File" %>
+            <% end %>
+        </div>
+    </div>
+<% else %>
+    <h3>Please login to access admin tools</h3>
+<% end %>
+
