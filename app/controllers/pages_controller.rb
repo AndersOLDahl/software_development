@@ -19,6 +19,19 @@ class PagesController < ApplicationController
     @search.order = 'microsite_id'
     @search_data = @search.run
   end
+
+  def admin
+    @microsite = Microsite.new
+    @microsites = Microsite.all
+    @sites = Microsite.all.collect{|m| m.site}.uniq.sort
+    @country = Microsite.all.collect{|m| m.country}.uniq.sort
+    @state_province = Microsite.all.collect{|m| m.state_province}.uniq.sort
+    @zone = Microsite.all.collect{|m| m.zone}.uniq.sort
+    @sub_zone = Microsite.all.collect{|m| m.sub_zone}.uniq.sort
+    @biomimic = Microsite.all.collect{|m| m.biomimic}.uniq.sort
+    @wave_exp = Microsite.all.collect{|m| m.wave_exp}.uniq.sort
+  end
+
   def myinfowindow(id, site, lat, lon, location, biomimic, wave_exp)
     "<div class=\"info-box\">
        <p class=\"info-box-text\"><b>ID:</b> #{id}</p>
