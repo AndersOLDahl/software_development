@@ -1,3 +1,78 @@
 FORMAT: 1A
 
 # CS4500 Team 7
+
+## Microsites [/microsites.json{?include_readings,limit,offset,start_time,end_time,site,state_province,country,biomimic,zone,sub_zone,wave_exp,tide_height}]
+
+### List all Microsites [GET]
+
+Returns a filtered json array of microsites.
+All microsite parameters may be specified multiple times with square brackets,
+e.g. `?biomimic[]=TEST1&biomimic[]=TEST2`. This will return microsites with either value.
+
++ Parameters
+
+    + include_readings (boolean) - If true, include matching readings for each microsite.
+      Defaults to false. This is expensive, use only with limit/other filters.
+    + limit (number) - The maximum number of microsites to return, as an integer.
+    + offset (number) - The offset to start returning records from. Use with limit to batch results.
+    + start_time (number) - A unix timestamp. Only microsites with at least one reading start <= reading < end are returned.
+    + end_time (number) - A unix timestamp. Only microsites with at least one reading start <= reading < end are returned.
+    + site (string) - Only return microsites with this site.
+    + state_province (string) - Only return microsites with this state/province.
+    + country (string) - Only return microsites with this country.
+    + biomimic (string) - Only return microsites with this biomimic.
+    + zone (string) - Only return microsites with this zone.
+    + sub_zone (string) - Only return microsites with this sub-zone.
+    + wave_exp (string) - Only return microsites with this wave exposure.
+    + tide_height (number) - A float. Only return microsites with this tide height.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "biomimic": "TEST1",
+                "country": "TEST1",
+                "field_lat": 31.0,
+                "field_lon": -150.0,
+                "id": 1,
+                "location": "TEST1",
+                "microsite_id": "ID1",
+                "site": "TEST1",
+                "state_province": "TEST1",
+                "sub_zone": "TEST1",
+                "tide_height": 1.0,
+                "wave_exp": "1",
+                "zone": "TEST1"
+            },
+            {
+                "biomimic": "TEST2",
+                "country": "TEST2",
+                "field_lat": 20.0,
+                "field_lon": -140.0,
+                "id": 2,
+                "location": "TEST2",
+                "microsite_id": "ID2",
+                "site": "TEST2",
+                "state_province": "TEST2",
+                "sub_zone": "TEST2",
+                "tide_height": 2.0,
+                "wave_exp": "2",
+                "zone": "TEST2"
+            },
+            {
+                "biomimic": "TEST3",
+                "country": "TEST3",
+                "field_lat": 20.0,
+                "field_lon": -140.0,
+                "id": 3,
+                "location": "TEST3",
+                "microsite_id": "ID3",
+                "site": "TEST3",
+                "state_province": "TEST3",
+                "sub_zone": "TEST3",
+                "tide_height": 3.0,
+                "wave_exp": "3",
+                "zone": "TEST3"
+            }
+        ]
