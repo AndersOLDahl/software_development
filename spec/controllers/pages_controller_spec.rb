@@ -35,7 +35,7 @@ describe PagesController do
 
     it "assigns @state" do
       get :home
-      expect(assigns(:state)).not_to be_nil
+      expect(assigns(:state_province)).not_to be_nil
     end
 
     it "assigns @zone" do
@@ -55,7 +55,7 @@ describe PagesController do
 
     it "assigns @wave_exposure" do
       get :home
-      expect(assigns(:wave_exposure)).not_to be_nil
+      expect(assigns(:wave_exp)).not_to be_nil
     end
   end
   describe "myinfowindow" do
