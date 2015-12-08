@@ -36,13 +36,22 @@ class MicrositesController < ApplicationController
 
         if params.has_key? 'start_time'
             # Only show microsites with at least one reading at or after start_time, if provided
-            microsites = microsites.where('readings.timestamp >= to_timestamp(?)', params["start_time"])
+            microsites = microsites.where('readings.timestamp >= to_timestamp(?)', params['start_time'])
         end
 
         if params.has_key? 'end_time'
             # Only show microsites with at least one reading before end_time, if provided
-            microsites = microsites.where('readings.timestamp < to_timestamp(?)', params["end_time"])
+            microsites = microsites.where('readings.timestamp < to_timestamp(?)', params['end_time'])
         end
+
+        if params.has_key? 'limit'
+            microsites = microsites.limit(params['limit'])
+
+            if params.has_key? 'offset'
+                microsites = microsites.offset(params['offset'])
+            end
+        end
+
 
         # Take just the valid filters for the microsites table
         microsite_filters = params.slice('site', 'state_province', 'country', 'biomimic', 'zone', 'sub_zone', 'wave_exp', 'tide_height')
@@ -55,7 +64,7 @@ class MicrositesController < ApplicationController
             # Tell ActiveRecord we will be using the reading data to improve query efficiency.
             return microsites.includes(:readings).to_json(:include => :readings)
         else
-            return microsites.to_json
+            return microsites.uniq.to_json
         end
     end
 end
